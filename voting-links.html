@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALPHA DRIVE ONE | Voting Links & Admin</title>
+    <title>ALPHA DRIVE ONE | Voting Links</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -113,9 +113,7 @@
             gap: 8px;
         }
 
-        .logo i {
-            font-size: 1.2rem;
-        }
+        .logo i { font-size: 1.2rem; }
 
         .nav-toggle {
             background: none;
@@ -128,9 +126,7 @@
             transition: transform 0.3s ease;
         }
 
-        .nav-toggle:hover {
-            transform: rotate(90deg);
-        }
+        .nav-toggle:hover { transform: rotate(90deg); }
 
         .nav-links {
             position: fixed;
@@ -177,17 +173,13 @@
             padding-left: 20px;
         }
 
-        /* Admin Mode Link Style */
         .nav-link.admin-mode-active {
             color: var(--primary-gold);
             background: rgba(228, 220, 184, 0.15);
             border-color: var(--primary-gold);
         }
 
-        .nav-link i {
-            width: 20px;
-            text-align: center;
-        }
+        .nav-link i { width: 20px; text-align: center; }
 
         /* Main Content */
         .main-content {
@@ -236,7 +228,7 @@
 
         /* Admin Section (Hidden by default) */
         .admin-section {
-            display: none; /* Toggled via JS */
+            display: none;
             background: rgba(228, 220, 184, 0.05);
             border: 1px solid var(--primary-gold);
             border-radius: 15px;
@@ -245,9 +237,7 @@
             animation: slideDown 0.5s ease;
         }
 
-        .admin-section.visible {
-            display: block;
-        }
+        .admin-section.visible { display: block; }
 
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-20px); }
@@ -263,10 +253,7 @@
             padding-bottom: 15px;
         }
 
-        .admin-header h3 {
-            color: var(--primary-gold);
-            font-size: 1.5rem;
-        }
+        .admin-header h3 { color: var(--primary-gold); font-size: 1.5rem; }
 
         .admin-form-grid {
             display: grid;
@@ -274,17 +261,9 @@
             gap: 20px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
 
-        .form-group label {
-            font-size: 0.9rem;
-            color: var(--muted-text);
-            font-weight: 500;
-        }
+        .form-group label { font-size: 0.9rem; color: var(--muted-text); font-weight: 500; }
 
         .form-control {
             background: var(--input-bg);
@@ -330,15 +309,8 @@
             color: var(--dark-bg);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(228, 220, 184, 0.3);
-        }
-
-        .btn-full {
-            width: 100%;
-            justify-content: center;
-        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(228, 220, 184, 0.3); }
+        .btn-full { width: 100%; justify-content: center; }
 
         /* Stats & Filters */
         .stats-grid {
@@ -358,10 +330,7 @@
             transition: all 0.3s ease;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-gold);
-        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary-gold); }
 
         .stat-number {
             font-size: 2.5rem;
@@ -372,16 +341,9 @@
             margin-bottom: 10px;
         }
 
-        .stat-label {
-            color: var(--muted-text);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .stat-label { color: var(--muted-text); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .links-section {
-            animation: slideUp 0.8s ease 0.4s both;
-        }
+        .links-section { animation: slideUp 0.8s ease 0.4s both; }
 
         .links-header {
             display: flex;
@@ -392,19 +354,9 @@
             gap: 20px;
         }
 
-        .links-header h3 {
-            font-size: 1.8rem;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .links-header h3 { font-size: 1.8rem; color: #ffffff; display: flex; align-items: center; gap: 12px; }
 
-        .filters {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .filter-btn {
             padding: 10px 20px;
@@ -418,8 +370,7 @@
             font-weight: 500;
         }
 
-        .filter-btn.active,
-        .filter-btn:hover {
+        .filter-btn.active, .filter-btn:hover {
             background: var(--accent-gradient);
             color: var(--dark-bg);
             border-color: var(--primary-gold);
@@ -438,11 +389,7 @@
             margin-bottom: 30px;
         }
 
-        .search-box:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 0 3px rgba(228, 220, 184, 0.1);
-        }
+        .search-box:focus { outline: none; border-color: var(--primary-gold); box-shadow: 0 0 0 3px rgba(228, 220, 184, 0.1); }
 
         /* Links Container & Cards */
         .links-container {
@@ -463,16 +410,9 @@
             position: relative;
         }
 
-        .link-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-gold);
-            box-shadow: 0 15px 40px rgba(228, 220, 184, 0.2);
-        }
+        .link-card:hover { transform: translateY(-8px); border-color: var(--primary-gold); box-shadow: 0 15px 40px rgba(228, 220, 184, 0.2); }
 
-        .link-card.new {
-            border: 2px solid var(--success-color);
-            animation: pulse 2s infinite;
-        }
+        .link-card.new { border: 2px solid var(--success-color); animation: pulse 2s infinite; }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
@@ -493,12 +433,7 @@
             z-index: 1;
         }
 
-        .link-platform {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
+        .link-platform { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
 
         .link-platform i {
             color: var(--primary-gold);
@@ -520,12 +455,7 @@
             font-weight: 600;
         }
 
-        .link-meta {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+        .link-meta { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 
         .link-type {
             display: inline-block;
@@ -541,12 +471,7 @@
         .link-type.event { background: rgba(255, 152, 0, 0.1); border-color: var(--warning-color); color: var(--warning-color); }
         .link-type.emergency { background: rgba(255, 82, 82, 0.1); border-color: var(--danger-color); color: var(--danger-color); }
 
-        .link-url-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-        }
+        .link-url-container { flex-grow: 1; display: flex; align-items: center; margin: 15px 0; }
 
         .link-url {
             display: flex;
@@ -564,10 +489,7 @@
             font-weight: 500;
         }
 
-        .link-url:hover {
-            background: rgba(228, 220, 184, 0.1);
-            transform: translateY(-2px);
-        }
+        .link-url:hover { background: rgba(228, 220, 184, 0.1); transform: translateY(-2px); }
 
         .link-notes {
             color: var(--muted-text);
@@ -591,10 +513,7 @@
         /* Modals */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
             z-index: 2000;
@@ -605,10 +524,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
+        .modal-overlay.active { display: flex; opacity: 1; }
 
         .modal {
             background: #1a1a1a;
@@ -622,65 +538,13 @@
             transition: transform 0.3s ease;
         }
 
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
+        .modal-overlay.active .modal { transform: scale(1); }
 
-        .modal h3 {
-            color: var(--primary-gold);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            text-align: center;
-        }
+        .modal h3 { color: var(--primary-gold); margin-bottom: 20px; font-size: 1.5rem; text-align: center; }
 
-        .modal-body {
-            margin-bottom: 25px;
-            color: var(--muted-text);
-            line-height: 1.6;
-        }
+        .modal-body { margin-bottom: 25px; color: var(--muted-text); line-height: 1.6; }
 
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: flex-end;
-        }
-
-        .code-block {
-            background: #000;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #a5d6ff;
-            overflow-x: auto;
-            margin: 15px 0;
-            border: 1px solid var(--border-color);
-        }
-
-        /* Settings Button */
-        .settings-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border-color);
-            color: var(--muted-text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 900;
-            transition: all 0.3s ease;
-        }
-
-        .settings-btn:hover {
-            background: var(--accent-gradient);
-            color: var(--dark-bg);
-            transform: rotate(90deg);
-        }
+        .modal-actions { display: flex; gap: 15px; justify-content: flex-end; }
 
         /* Responsive */
         @media (min-width: 768px) {
@@ -705,8 +569,7 @@
         }
 
         .loading-spinner {
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border: 3px solid var(--border-color);
             border-top-color: var(--primary-gold);
             border-radius: 50%;
@@ -753,7 +616,7 @@
             <div class="admin-header">
                 <h3><i class="fas fa-plus-circle"></i> Add New Link</h3>
                 <div id="connection-status" style="font-size: 0.9rem; color: var(--warning-color);">
-                    <i class="fas fa-exclamation-triangle"></i> Supabase Not Connected
+                    <i class="fas fa-exclamation-triangle"></i> Check HTML for Credentials
                 </div>
             </div>
             
@@ -833,11 +696,6 @@
         </section>
     </main>
 
-    <!-- Settings Button -->
-    <button id="settings-trigger" class="settings-btn" title="Supabase Setup">
-        <i class="fas fa-cog"></i>
-    </button>
-
     <!-- Password Modal -->
     <div id="password-modal" class="modal-overlay">
         <div class="modal">
@@ -855,98 +713,34 @@
         </div>
     </div>
 
-    <!-- Setup/Config Modal -->
-    <div id="setup-modal" class="modal-overlay">
-        <div class="modal">
-            <h3><i class="fas fa-database"></i> Supabase Setup</h3>
-            <div class="modal-body">
-                <p>To save links permanently, connect your Supabase project.</p>
-                
-                <div class="form-group" style="margin-top:10px;">
-                    <label>Project URL</label>
-                    <input type="text" id="supabase-url" class="form-control" placeholder="https://xyz.supabase.co">
-                </div>
-                <div class="form-group" style="margin-top:10px;">
-                    <label>API Key (Anon/Public)</label>
-                    <input type="password" id="supabase-key" class="form-control" placeholder="eyJhbGciOiJIUzI1NiIsInR5...">
-                </div>
-
-                <div style="margin-top: 20px;">
-                    <p><strong><i class="fas fa-info-circle"></i> Required SQL Command:</strong></p>
-                    <p style="font-size:0.8rem; margin-bottom:5px;">Run this in your Supabase SQL Editor:</p>
-                    <div class="code-block">
-create table voting_links (
-  id bigint generated by default as identity primary key,
-  platform text,
-  link text,
-  type text,
-  notes text,
-  deadline timestamp with time zone,
-  status text default 'active',
-  is_new boolean default false,
-  created_at timestamp with time zone default timezone('utc'::text, now())
-);
-                    </div>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button class="btn" style="background:transparent; border:1px solid var(--border-color); color:white;" onclick="closeModals()">Close</button>
-                <button class="btn btn-primary" onclick="saveSupabaseConfig()">Save & Connect</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // ===================== CONFIG & STATE =====================
-        const ADMIN_PASSWORD = "admin123"; // Simple client-side password
+        // ================================================================
+        // --- PASTE YOUR SUPABASE CREDENTIALS HERE BELOW ---
+        // ================================================================
+        
+        const SUPABASE_URL = "https://jbjxljlaqarszwnehyye.supabase.co"; 
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpianhsamxhcWFyc3p3bmVoeXllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMjIzMDMsImV4cCI6MjA4ODY5ODMwM30.EXumn0fsKv3ir_wxuH0Fh3oXzPaj1R2MI1S8ND_S2uQ";
+
+        // ================================================================
+        // ================================================================
+
+        const ADMIN_PASSWORD = "admin123"; 
         let isAdmin = false;
         let supabase = null;
         let supabaseLinks = [];
 
         // Local Data (Fallback)
         const STATIC_LINKS = [
-            {
-                id: 1,
-                Platform: "Muniverse Web",
-                Link: "https://t.co/vWMY1WciMX",
-                Type: "daily",
-                Notes: "STAGE M PICK",
-                Status: "active",
-                isNew: true
-            },
-            {
-                id: 5,
-                Platform: "UPICK",
-                Link: "https://t.co/nZ2rnaHIFV",
-                Type: "emergency",
-                Notes: "Best Rising Star (Boy)",
-                Status: "active",
-                isNew: true
-            },
-            {
-                id: 3,
-                Platform: "Fancast",
-                Link: "https://t.co/MRfdCLngx1",
-                Type: "daily",
-                Notes: "FANS' STAGE PICK",
-                Status: "active",
-                isNew: true
-            },
-            {
-                id: 4,
-                Platform: "HIGHER",
-                Link: "https://t.co/zYaCtIQksx",
-                Type: "daily",
-                Notes: "HOT STAGE",
-                Status: "active",
-                isNew: true
-            },
+            { id: 1, Platform: "Muniverse Web", Link: "https://t.co/vWMY1WciMX", Type: "daily", Notes: "STAGE M PICK", Status: "active", isNew: true },
+            { id: 5, Platform: "UPICK", Link: "https://t.co/nZ2rnaHIFV", Type: "emergency", Notes: "Best Rising Star (Boy)", Status: "active", isNew: true },
+            { id: 3, Platform: "Fancast", Link: "https://t.co/MRfdCLngx1", Type: "daily", Notes: "FANS' STAGE PICK", Status: "active", isNew: true },
+            { id: 4, Platform: "HIGHER", Link: "https://t.co/zYaCtIQksx", Type: "daily", Notes: "HOT STAGE", Status: "active", isNew: true },
         ];
 
         let allLinks = [...STATIC_LINKS];
         let filteredLinks = [];
 
-        // ===================== DOM ELEMENTS =====================
+        // Elements
         const elements = {
             linksContainer: document.getElementById('links-container'),
             searchBox: document.getElementById('search-box'),
@@ -958,22 +752,17 @@ create table voting_links (
             adminPanel: document.getElementById('admin-panel'),
             adminToggleBtn: document.getElementById('admin-toggle-btn'),
             passwordModal: document.getElementById('password-modal'),
-            setupModal: document.getElementById('setup-modal'),
             connectionStatus: document.getElementById('connection-status'),
-            settingsBtn: document.getElementById('settings-trigger'),
             addLinkForm: document.getElementById('add-link-form')
         };
 
-        // ===================== INITIALIZATION =====================
         document.addEventListener('DOMContentLoaded', () => {
             initSupabase();
             setupEventListeners();
             loadVotingLinks();
-            initScrollAnimations();
         });
 
         function setupEventListeners() {
-            // Search & Filters
             elements.searchBox.addEventListener('input', filterLinks);
             elements.filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -983,7 +772,6 @@ create table voting_links (
                 });
             });
 
-            // Mobile Nav
             const navToggle = document.querySelector('.nav-toggle');
             const navLinks = document.querySelector('.nav-links');
             navToggle.addEventListener('click', () => {
@@ -991,44 +779,33 @@ create table voting_links (
                 navToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
 
-            // Admin Toggle
             elements.adminToggleBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (isAdmin) {
-                    // Logout
                     isAdmin = false;
                     elements.adminPanel.classList.remove('visible');
                     elements.adminToggleBtn.classList.remove('admin-mode-active');
                     elements.adminToggleBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin Mode';
                     showToast("🔒 Admin mode deactivated");
                 } else {
-                    // Login Prompt
                     elements.passwordModal.classList.add('active');
                     document.getElementById('admin-password-input').value = '';
                     document.getElementById('admin-password-input').focus();
                 }
             });
 
-            // Settings Button
-            elements.settingsBtn.addEventListener('click', () => {
-                document.getElementById('supabase-url').value = localStorage.getItem('supabase_url') || '';
-                document.getElementById('supabase-key').value = localStorage.getItem('supabase_key') || '';
-                elements.setupModal.classList.add('active');
-            });
-
-            // Form Submit
             elements.addLinkForm.addEventListener('submit', handleAddLink);
         }
 
-        // ===================== SUPABASE LOGIC =====================
         function initSupabase() {
-            const url = localStorage.getItem('supabase_url');
-            const key = localStorage.getItem('supabase_key');
+            // Check if the user has replaced the placeholder strings
+            const isUrlPlaceholder = SUPABASE_URL.includes("PASTE_YOUR");
+            const isKeyPlaceholder = SUPABASE_KEY.includes("PASTE_YOUR");
 
-            if (url && key && window.supabase) {
+            if (!isUrlPlaceholder && !isKeyPlaceholder && window.supabase) {
                 try {
-                    supabase = window.supabase.createClient(url, key);
-                    elements.connectionStatus.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success-color)"></i> Supabase Connected';
+                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                    elements.connectionStatus.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success-color)"></i> Connected';
                     elements.connectionStatus.style.color = "var(--success-color)";
                     fetchSupabaseLinks();
                 } catch (error) {
@@ -1036,7 +813,7 @@ create table voting_links (
                     elements.connectionStatus.innerHTML = '<i class="fas fa-times-circle"></i> Connection Error';
                 }
             } else {
-                elements.connectionStatus.innerHTML = '<i class="fas fa-cog"></i> Setup Required (Click Bottom Right)';
+                elements.connectionStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Edit HTML for Credentials';
             }
         }
 
@@ -1054,7 +831,6 @@ create table voting_links (
                 return;
             }
 
-            // Normalize data format to match static structure (Capitalize keys)
             supabaseLinks = data.map(item => ({
                 id: item.id,
                 Platform: item.platform,
@@ -1064,13 +840,10 @@ create table voting_links (
                 Deadline: item.deadline,
                 Status: item.status,
                 isNew: item.is_new,
-                isDbItem: true // Flag to identify DB items
+                isDbItem: true
             }));
 
-            // Merge: Static Links first, then DB Links
             allLinks = [...STATIC_LINKS, ...supabaseLinks];
-            
-            // Re-render
             filterLinks();
             updateStats();
         }
@@ -1078,7 +851,7 @@ create table voting_links (
         async function handleAddLink(e) {
             e.preventDefault();
             if (!supabase) {
-                showToast("❌ Please setup Supabase first (Click gear icon)");
+                showToast("❌ Supabase not configured. Edit HTML file.");
                 return;
             }
 
@@ -1101,27 +874,10 @@ create table voting_links (
             } else {
                 showToast("✅ Link saved successfully!");
                 elements.addLinkForm.reset();
-                fetchSupabaseLinks(); // Refresh list
+                fetchSupabaseLinks();
             }
         }
 
-        function saveSupabaseConfig() {
-            const url = document.getElementById('supabase-url').value.trim();
-            const key = document.getElementById('supabase-key').value.trim();
-
-            if (!url || !key) {
-                showToast("⚠️ Please enter both URL and Key");
-                return;
-            }
-
-            localStorage.setItem('supabase_url', url);
-            localStorage.setItem('supabase_key', key);
-            
-            closeModals();
-            location.reload(); // Reload to init client
-        }
-
-        // ===================== AUTH & MODALS =====================
         function checkAdminPassword() {
             const input = document.getElementById('admin-password-input').value;
             if (input === ADMIN_PASSWORD) {
@@ -1133,8 +889,6 @@ create table voting_links (
                 showToast("🔓 Admin Mode Activated");
             } else {
                 showToast("❌ Incorrect Password");
-                document.getElementById('admin-password-input').classList.add('error-shake');
-                setTimeout(() => document.getElementById('admin-password-input').classList.remove('error-shake'), 500);
             }
         }
 
@@ -1142,22 +896,13 @@ create table voting_links (
             document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
         }
 
-        // Close modal on outside click
         window.onclick = function(event) {
-            if (event.target.classList.contains('modal-overlay')) {
-                closeModals();
-            }
+            if (event.target.classList.contains('modal-overlay')) closeModals();
         }
 
-        // ===================== CORE LOGIC =====================
         function loadVotingLinks() {
-            // Initial load logic mostly handled by initSupabase -> fetchSupabaseLinks
-            // If no supabase, just render static
             if (!supabase) {
-                setTimeout(() => {
-                    filterLinks();
-                    updateStats();
-                }, 500);
+                setTimeout(() => { filterLinks(); updateStats(); }, 500);
             }
         }
 
@@ -1166,13 +911,9 @@ create table voting_links (
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
 
             filteredLinks = allLinks.filter(link => {
-                // Type filter
                 if (activeFilter !== 'all' && link.Type.toLowerCase() !== activeFilter) return false;
-                
-                // Search filter
                 const searchMatch = link.Platform.toLowerCase().includes(searchTerm) || 
                                     (link.Notes && link.Notes.toLowerCase().includes(searchTerm));
-                
                 return searchMatch;
             });
 
@@ -1189,10 +930,7 @@ create table voting_links (
                 return;
             }
 
-            const iconMap = {
-                'idol champ': 'fas fa-crown', 'mubeat': 'fas fa-music', 'mnet': 'fas fa-tv',
-                'higher': 'fas fa-chart-line', 'default': 'fas fa-vote-yea'
-            };
+            const iconMap = { 'idol champ': 'fas fa-crown', 'mubeat': 'fas fa-music', 'mnet': 'fas fa-tv', 'higher': 'fas fa-chart-line', 'default': 'fas fa-vote-yea' };
 
             elements.linksContainer.innerHTML = filteredLinks.map(link => {
                 const platformKey = link.Platform.toLowerCase();
@@ -1205,16 +943,11 @@ create table voting_links (
                     const deadlineDate = new Date(link.Deadline);
                     const now = new Date();
                     const diff = deadlineDate - now;
-                    const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-                    
                     if (diff > 0) {
                         deadlineHTML = `<div class="link-deadline"><i class="fas fa-clock"></i> Deadline: ${deadlineDate.toLocaleDateString()}</div>`;
-                    } else {
-                        deadlineHTML = `<div class="link-deadline" style="color:gray"><i class="fas fa-clock"></i> Ended</div>`;
                     }
                 }
 
-                // Delete button for admin (only if it's a DB item)
                 let deleteBtn = '';
                 if (isAdmin && link.isDbItem) {
                     deleteBtn = `
@@ -1227,28 +960,16 @@ create table voting_links (
                 return `
                 <div class="link-card ${isNew ? 'new' : ''}" data-type="${typeClass}">
                     ${isNew ? '<span class="new-badge">NEW</span>' : ''}
-                    
-                    <div class="link-platform">
-                        <i class="${iconClass}"></i>
-                        <h4>${link.Platform}</h4>
-                    </div>
-                    
+                    <div class="link-platform"><i class="${iconClass}"></i><h4>${link.Platform}</h4></div>
                     <div class="link-meta">
                         <span class="link-type ${typeClass}">${link.Type.toUpperCase()}</span>
-                        <span class="link-type" style="border-color:var(--border-color); color:var(--muted-text)">
-                            <i class="fas fa-circle" style="font-size:0.5rem; vertical-align:middle; margin-right:5px;"></i>Active
-                        </span>
+                        <span class="link-type" style="border-color:var(--border-color); color:var(--muted-text)"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Active</span>
                     </div>
-                    
                     <div class="link-url-container">
-                        <a href="${link.Link}" target="_blank" class="link-url">
-                            Vote Now <i class="fas fa-external-link-alt" style="font-size:0.8rem"></i>
-                        </a>
+                        <a href="${link.Link}" target="_blank" class="link-url">Vote Now <i class="fas fa-external-link-alt"></i></a>
                     </div>
-                    
                     ${link.Notes ? `<div class="link-notes">${link.Notes}</div>` : ''}
                     ${deadlineHTML}
-                    
                     <div class="link-actions">
                         <a href="${link.Link}" target="_blank" class="action-btn"><i class="fas fa-copy"></i> Copy</a>
                         ${deleteBtn}
@@ -1260,15 +981,9 @@ create table voting_links (
 
         async function deleteDbLink(id) {
             if(!confirm("Are you sure you want to delete this link?")) return;
-            
             const { error } = await supabase.from('voting_links').delete().eq('id', id);
-            
-            if (error) {
-                showToast("❌ Failed to delete");
-            } else {
-                showToast("✅ Link deleted");
-                fetchSupabaseLinks();
-            }
+            if (error) showToast("❌ Failed to delete");
+            else { showToast("✅ Link deleted"); fetchSupabaseLinks(); }
         }
 
         function updateStats() {
@@ -1289,14 +1004,7 @@ create table voting_links (
             `;
             toast.innerHTML = msg;
             document.body.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        function initScrollAnimations() {
-            // Simple placeholder for scroll animations if needed
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
     </script>
 </body>
