@@ -436,6 +436,9 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
 
         .action-btn:hover {
@@ -494,6 +497,27 @@
             margin: 0 auto 20px;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .error-message {
+            color: var(--danger-color);
+            text-align: center;
+            padding: 40px;
+            grid-column: 1/-1;
+        }
+        
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -552,7 +576,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="updated-time">0</div>
-                <div class="stat-label">Minutes Ago</div>
+                <div class="stat-label">Last Updated</div>
             </div>
         </div>
 
@@ -573,7 +597,7 @@
             <div class="links-container" id="links-container">
                 <div class="loading-state" style="text-align:center; grid-column: 1/-1;">
                     <div class="loading-spinner"></div>
-                    <p>Loading voting links...</p>
+                    <p>Loading voting links from database...</p>
                 </div>
             </div>
         </section>
@@ -588,27 +612,22 @@
 
     <script>
         // ================================================================
-        // --- CONFIGURATION SECTION ---
+        // --- CONFIGURATION ---
         // ================================================================
         
-       // PASTE YOUR SUPABASE CREDENTIALS HERE
-         const SUPABASE_URL = "https://jbjxljlaqarszwnehyye.supabase.co"; 
+        const SUPABASE_URL = "https://jbjxljlaqarszwnehyye.supabase.co"; 
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpianhsamxhcWFyc3p3bmVoeXllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMjIzMDMsImV4cCI6MjA4ODY5ODMwM30.EXumn0fsKv3ir_wxuH0Fh3oXzPaj1R2MI1S8ND_S2uQ";
 
         // ================================================================
-        // ================================================================
-        // ================================================================
-        // ================================================================
-
-      
-        let supabaseLinks = [];
-
-
-
-        let allLinks = [...STATIC_LINKS];
+        
+        // Initialize Supabase - declare once globally
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        // Data arrays
+        let allLinks = [];
         let filteredLinks = [];
 
-        // Elements
+        // DOM Elements
         const elements = {
             linksContainer: document.getElementById('links-container'),
             searchBox: document.getElementById('search-box'),
@@ -619,14 +638,27 @@
             updatedTime: document.getElementById('updated-time'),
         };
 
+        // Icon mapping for platforms
+        const iconMap = {
+            'idol champ': 'fas fa-crown',
+            'mubeat': 'fas fa-music',
+            'mnet': 'fas fa-tv',
+            'higher': 'fas fa-chart-line',
+            'muniverse': 'fas fa-globe',
+            'upick': 'fas fa-star',
+            'fancast': 'fas fa-users',
+            'default': 'fas fa-vote-yea'
+        };
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            initSupabase();
             setupEventListeners();
-            loadVotingLinks();
+            fetchLinks();
         });
 
         function setupEventListeners() {
             elements.searchBox.addEventListener('input', filterLinks);
+            
             elements.filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     elements.filterButtons.forEach(b => b.classList.remove('active'));
@@ -635,64 +667,72 @@
                 });
             });
 
+            // Mobile navigation toggle
             const navToggle = document.querySelector('.nav-toggle');
             const navLinks = document.querySelector('.nav-links');
             if(navToggle) {
                 navToggle.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
-                    navToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                    navToggle.innerHTML = navLinks.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
                 });
             }
         }
 
-        function initSupabase() {
-            const isUrlPlaceholder = SUPABASE_URL.includes("PASTE_YOUR");
-            const isKeyPlaceholder = SUPABASE_KEY.includes("PASTE_YOUR");
+        async function fetchLinks() {
+            try {
+                elements.linksContainer.innerHTML = `
+                    <div class="loading-state" style="text-align:center; grid-column: 1/-1;">
+                        <div class="loading-spinner"></div>
+                        <p>Loading voting links from database...</p>
+                    </div>`;
 
-            if (!isUrlPlaceholder && !isKeyPlaceholder && window.supabase) {
-                try {
-                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-                    fetchSupabaseLinks();
-                } catch (error) {
-                    console.error("Supabase init error:", error);
+                // Use supabaseClient instead of supabase
+                const { data, error } = await supabaseClient
+                    .from('voting_links')
+                    .select('*')
+                    .eq('status', 'active')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    throw error;
                 }
-            }
-        }
 
-        async function fetchSupabaseLinks() {
-            if (!supabase) return;
+                // Map database fields to our format
+                allLinks = data.map(item => ({
+                    id: item.id,
+                    Platform: item.platform,
+                    Link: item.link,
+                    Type: item.type,
+                    Notes: item.notes,
+                    Deadline: item.deadline,
+                    Status: item.status,
+                    isNew: item.is_new || false,
+                    created_at: item.created_at
+                }));
 
-            const { data, error } = await supabase
-                .from('voting_links')
-                .select('*')
-                .eq('status', 'active')
-                .order('created_at', { ascending: false });
+                // If no data, show empty state
+                if (allLinks.length === 0) {
+                    elements.linksContainer.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align:center; padding: 60px 20px;">
+                            <i class="fas fa-link" style="font-size: 3rem; color: var(--muted-text); margin-bottom: 15px;"></i>
+                            <h3 style="color: var(--light-text); margin-bottom: 10px;">No Voting Links Yet</h3>
+                            <p style="color: var(--muted-text);">Check back soon or add links through the admin panel.</p>
+                        </div>`;
+                }
 
-            if (error) {
+                filteredLinks = [...allLinks];
+                renderLinks();
+                updateStats();
+                
+            } catch (error) {
                 console.error('Error fetching links:', error);
-                return;
-            }
-
-            supabaseLinks = data.map(item => ({
-                id: item.id,
-                Platform: item.platform,
-                Link: item.link,
-                Type: item.type,
-                Notes: item.notes,
-                Deadline: item.deadline,
-                Status: item.status,
-                isNew: item.is_new,
-                isDbItem: true
-            }));
-
-            allLinks = [...STATIC_LINKS, ...supabaseLinks];
-            filterLinks();
-            updateStats();
-        }
-
-        function loadVotingLinks() {
-            if (!supabase) {
-                setTimeout(() => { filterLinks(); updateStats(); }, 500);
+                elements.linksContainer.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <h3>Failed to Load Links</h3>
+                        <p style="color: var(--muted-text);">Please try refreshing the page.</p>
+                    </div>`;
             }
         }
 
@@ -701,7 +741,12 @@
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
 
             filteredLinks = allLinks.filter(link => {
-                if (activeFilter !== 'all' && link.Type.toLowerCase() !== activeFilter) return false;
+                // Filter by type
+                if (activeFilter !== 'all' && link.Type.toLowerCase() !== activeFilter) {
+                    return false;
+                }
+                
+                // Filter by search term
                 const searchMatch = link.Platform.toLowerCase().includes(searchTerm) || 
                                     (link.Notes && link.Notes.toLowerCase().includes(searchTerm));
                 return searchMatch;
@@ -715,12 +760,10 @@
                 elements.linksContainer.innerHTML = `
                     <div style="grid-column: 1/-1; text-align:center; padding: 40px;">
                         <i class="fas fa-search" style="font-size: 2rem; color: var(--muted-text); margin-bottom:10px;"></i>
-                        <p>No links found.</p>
+                        <p>No matching links found.</p>
                     </div>`;
                 return;
             }
-
-            const iconMap = { 'idol champ': 'fas fa-crown', 'mubeat': 'fas fa-music', 'mnet': 'fas fa-tv', 'higher': 'fas fa-chart-line', 'default': 'fas fa-vote-yea' };
 
             elements.linksContainer.innerHTML = filteredLinks.map(link => {
                 const platformKey = link.Platform.toLowerCase();
@@ -728,6 +771,7 @@
                 const typeClass = link.Type.toLowerCase();
                 const isNew = link.isNew;
 
+                // Format deadline if exists
                 let deadlineHTML = '';
                 if (link.Deadline) {
                     const deadlineDate = new Date(link.Deadline);
@@ -741,18 +785,27 @@
                 return `
                 <div class="link-card ${isNew ? 'new' : ''}" data-type="${typeClass}">
                     ${isNew ? '<span class="new-badge">NEW</span>' : ''}
-                    <div class="link-platform"><i class="${iconClass}"></i><h4>${link.Platform}</h4></div>
+                    <div class="link-platform">
+                        <i class="${iconClass}"></i>
+                        <h4>${link.Platform}</h4>
+                    </div>
                     <div class="link-meta">
                         <span class="link-type ${typeClass}">${link.Type.toUpperCase()}</span>
-                        <span class="link-type" style="border-color:var(--border-color); color:var(--muted-text)"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Active</span>
+                        <span class="link-type" style="border-color:var(--border-color); color:var(--muted-text)">
+                            <i class="fas fa-circle" style="font-size:0.5rem; color:var(--success-color);"></i> Active
+                        </span>
                     </div>
                     <div class="link-url-container">
-                        <a href="${link.Link}" target="_blank" class="link-url">Vote Now <i class="fas fa-external-link-alt"></i></a>
+                        <a href="${link.Link}" target="_blank" rel="noopener noreferrer" class="link-url">
+                            Vote Now <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                     ${link.Notes ? `<div class="link-notes">${link.Notes}</div>` : ''}
                     ${deadlineHTML}
                     <div class="link-actions">
-                        <a href="${link.Link}" target="_blank" class="action-btn"><i class="fas fa-copy"></i> Copy</a>
+                        <button onclick="copyToClipboard('${link.Link}')" class="action-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
                     </div>
                 </div>
                 `;
@@ -763,9 +816,32 @@
             elements.totalLinks.textContent = allLinks.length;
             elements.dailyLinks.textContent = allLinks.filter(l => l.Type === 'daily').length;
             elements.activeLinks.textContent = allLinks.length;
-            elements.updatedTime.textContent = "Just now";
+            
+            // Format last updated time
+            const now = new Date();
+            elements.updatedTime.textContent = now.toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
         }
+
+        // Copy to clipboard function (global)
+        window.copyToClipboard = function(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show temporary success message
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.textContent = 'Link copied to clipboard!';
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy link. Please try again.');
+            });
+        };
     </script>
 </body>
 </html>
-
